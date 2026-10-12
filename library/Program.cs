@@ -14,7 +14,7 @@ var dataSource = NpgsqlDataSource.Create(connectionString);
 builder.Services.AddSingleton(dataSource);
 
 builder.Services.AddScoped<BookRepository>();
-builder.Services.AddScoped<MemberRepository>();
+
 
 var app = builder.Build();
 

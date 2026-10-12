@@ -39,6 +39,18 @@ public class BookRepository
     }
 
     public async Task AddAsync(Book book)
+        // READ: one book, or null when no book has that id.
+    public async Task<Book?> GetByIdAsync(long id)
+    {
+        const string sql = "SELECT book_id, title, category, price FROM lending.book WHERE book_id = @id;";
+
+        await using var command = _dataSource.CreateCommand(sql);
+        command.Parameters.AddWithValue("id", id);      // @id in the SQL receives this value
+
+        await using var reader = await command.ExecuteReaderAsync();
+        return await reader.ReadAsync() ? ReadBook(reader) : null;
+    }
+
     {
         const string sql = "INSERT INTO lending.book (title, category, price) VALUES (@title, @category, @price);";
         await using var command = _dataSource.CreateCommand(sql);
