@@ -1,8 +1,41 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="lib-hero">
+    <h1>Welcome to the <span>Library System</span></h1>
+    <p>A modern, high-performance management portal. Easily track books, manage members, and organize notes all in one place.</p>
+</div>
+
+<div class="lib-toolbar">
+    <div>
+        <h2>Quick Actions</h2>
+        <p class="lib-count">>_ Select a module to begin</p>
+    </div>
+</div>
+
+<div class="lib-grid mb-5">
+    <div class="lib-box">
+        <h3 class="lib-box-title">📖 Book Catalogue</h3>
+        <p class="lib-box-meta">Browse, add, and update the library's book inventory. Keep track of titles, categories, and prices.</p>
+        <div class="lib-box-actions">
+            <a asp-controller="Books" asp-action="Index" class="lib-btn lib-btn-primary w-100">Manage Books</a>
+        </div>
+    </div>
+
+    <div class="lib-box">
+        <h3 class="lib-box-title">👥 Members Directory</h3>
+        <p class="lib-box-meta">Manage student and faculty accounts. Register new members and update their contact information.</p>
+        <div class="lib-box-actions">
+            <a asp-controller="Members" asp-action="Index" class="lib-btn lib-btn-ghost w-100">Manage Members</a>
+        </div>
+    </div>
+
+    <div class="lib-box">
+        <h3 class="lib-box-title">📝 System Notepad</h3>
+        <p class="lib-box-meta">Quickly jot down announcements, reminders, or internal notes for the library staff.</p>
+        <div class="lib-box-actions">
+            <a asp-controller="Notes" asp-action="Index" class="lib-btn lib-btn-ghost w-100">Open Notepad</a>
+        </div>
+    </div>
 </div>

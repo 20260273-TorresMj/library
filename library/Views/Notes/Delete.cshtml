@@ -1,0 +1,24 @@
+﻿@model Note
+@{
+    ViewData["Title"] = "Delete Note";
+}
+
+<div class="lib-danger-box">
+    <h1>Delete Note</h1>
+    <p>Are you sure you want to delete this note? This action cannot be undone.</p>
+
+    <dl class="lib-detail-list">
+        <dt>Title</dt>
+        <dd>@Model.Title</dd>
+
+        <dt>Body</dt>
+        <dd>@(Model.Body ?? "—")</dd>
+    </dl>
+
+    <form asp-action="Delete" asp-route-id="@Model.NoteId" method="post">
+        <div class="lib-actions" style="margin-top: 0;">
+            <button type="submit" class="lib-btn lib-btn-danger">Delete Note</button>
+            <a asp-action="Index" class="lib-btn lib-btn-ghost">Cancel</a>
+        </div>
+    </form>
+</div>

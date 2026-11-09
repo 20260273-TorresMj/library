@@ -1,4 +1,5 @@
-﻿using library.Data;
+﻿using Npgsql;
+using library.Data;
 using library.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,7 +28,6 @@ public class MembersController : Controller
         return View(new Member());
     }
 
-    // POST /Members/Create : the form was submitted.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Member member)
@@ -36,7 +36,15 @@ public class MembersController : Controller
         {
             return View(member);
         }
-        await _members.AddAsync(member);
+        try
+        {
+            await _members.AddAsync(member);
+        }
+        catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.UniqueViolation)
+        {
+            ModelState.AddModelError("Email", "Another member already uses this email");
+            return View(member);
+        }
         return RedirectToAction(nameof(Index));
     }
 
@@ -60,7 +68,15 @@ public class MembersController : Controller
         {
             return View(member);
         }
-        await _members.UpdateAsync(member);
+        try
+        {
+            await _members.UpdateAsync(member);
+        }
+        catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.UniqueViolation)
+        {
+            ModelState.AddModelError("Email", "Another member already uses this email");
+            return View(member);
+        }
         return RedirectToAction(nameof(Index));
     }
 
@@ -80,7 +96,27 @@ public class MembersController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(long id)
     {
-        await _members.DeleteAsync(id);
+        try
+        {
+            // 1. Delete the member.
+            await _members.DeleteAsync(id);
+        }
+        catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.ForeignKeyViolation)
+        {
+            // 3. Load the member again, to show them on the page.
+            var member = await _members.GetByIdAsync(id);
+            if (member == null)
+            {
+                // 5. Answer "not found".
+                return NotFound();
+            }
+            // 6. Set the message the page will show.
+            ViewBag.Error = "This member has loans on record, so the database will not delete them";
+            // 7. Show the Delete page again, with the member.
+            return View("Delete", member);
+        }
+        // 8. The member was deleted: go back to the list.
         return RedirectToAction(nameof(Index));
     }
+
 }

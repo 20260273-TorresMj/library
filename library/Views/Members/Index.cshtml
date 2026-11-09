@@ -3,37 +3,32 @@
     ViewData["Title"] = "Members";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="lib-toolbar">
     <div>
-        <h1 class="mb-0">Members</h1>
-        <p class="text-muted mb-0">@Model.Count members</p>
+        <h2>Members Directory</h2>
+        <p class="lib-count">>_ @Model.Count members found</p>
     </div>
-    <a asp-action="Create" class="btn btn-primary">Add a member</a>
+    <a asp-action="Create" class="lib-btn lib-btn-primary">+ Add a member</a>
 </div>
 
-<table class="table table-striped table-hover align-middle">
-    <thead class="table-dark">
-        <tr>
-            <th class="text-end" style="width:4rem">#</th>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Type</th>
-            <th style="width:10rem"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var member in Model)
-        {
-            <tr>
-                <td class="text-end">@member.MemberId</td>
-                <td>@member.FullName</td>
-                <td><span class="badge text-bg-secondary">@(member.Email ?? "—")</span></td>
-                <td>@member.MemberType</td>
-                <td class="text-end">
-                    <a asp-action="Edit" asp-route-id="@member.MemberId" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@member.MemberId" class="btn btn-sm btn-outline-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="lib-grid">
+    @foreach (var member in Model)
+    {
+        <div class="lib-box">
+            <div class="d-flex justify-content-between align-items-start">
+                <h3 class="lib-box-title">@member.FullName</h3>
+                <span class="lib-tag">#@member.MemberId</span>
+            </div>
+
+            <p class="lib-box-meta">
+                <strong>Email:</strong> @(member.Email ?? "—") <br />
+                <strong>Type:</strong> @member.MemberType
+            </p>
+
+            <div class="lib-box-actions">
+                <a asp-action="Edit" asp-route-id="@member.MemberId" class="lib-btn lib-btn-ghost lib-btn-small">Edit</a>
+                <a asp-action="Delete" asp-route-id="@member.MemberId" class="lib-btn lib-btn-danger lib-btn-small">Delete</a>
+            </div>
+        </div>
+    }
+</div>
