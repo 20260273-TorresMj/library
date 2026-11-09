@@ -28,8 +28,6 @@ public class LoanRepository
             MemberId = reader.GetInt64(1),
             MemberName = reader.GetString(2),
             BookTitle = reader.GetString(3),
-            LoanedOn = reader.GetFieldValue<DateOnly>(4).ToDateTime(TimeOnly.MinValue),
-            ReturnedOn = reader.IsDBNull(5) ? null : reader.GetFieldValue<DateOnly>(5).ToDateTime(TimeOnly.MinValue),
             DaysAllowed = reader.GetInt32(6),
             Status = reader.GetString(7)
         };
