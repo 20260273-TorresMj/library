@@ -123,6 +123,8 @@ public class LoanRepository
         var loans = new List<LoanView>();
         await using var command = _dataSource.CreateCommand(sql);
         command.Parameters.AddWithValue("member_id", memberId);
+
+        // 5. Run it, and get a reader for the rows.
         await using var reader = await command.ExecuteReaderAsync();
 
         while (await reader.ReadAsync())
