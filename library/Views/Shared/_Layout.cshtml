@@ -1,68 +1,182 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Tech Library</title>
+    <title>@ViewData["Title"] - Library System</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/library.styles.css" asp-append-version="true" />
+    <style>
+            /* 1. Global Body & Grid Background */
+            body {
+                background-color: #0a0c10;
+                background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+                background-size: 30px 30px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: #e5e7eb;
+            }
+
+            /* 2. Navbar Styling */
+            .navbar {
+                background-color: #0d1117 !important;
+                border-bottom: 1px solid #1f2937;
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+
+            /* ========================================== -->
+                    /* 3. NEW ATTRACTIVE LOGO STYLING             -->
+                    /* ========================================== */
+            .brand-container {
+                display: inline-flex;
+                align-items: center;
+                text-decoration: none !important;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                padding: 6px 16px 6px 6px;
+                border-radius: 50px;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+
+                .brand-container:hover {
+                    background: rgba(255, 255, 255, 0.06);
+                    border-color: rgba(13, 202, 240, 0.4);
+                    box-shadow: 0 0 15px rgba(13, 202, 240, 0.2);
+                }
+
+            .brand-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #a855f7, #0dcaf0); /* Purple to Cyan */
+                color: white;
+                font-size: 1.1rem;
+                margin-right: 12px;
+                box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+            }
+
+            .brand-text {
+                font-size: 1.25rem;
+                font-weight: 800;
+                color: #ffffff;
+                letter-spacing: 0.5px;
+                margin: 0;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            }
+
+            .brand-text-highlight {
+                color: #0dcaf0;
+            }
+
+            /* 4. Tech Cards */
+            .tech-card {
+                background-color: #111827;
+                border: 1px solid #1f2937;
+                border-left: 3px solid #0dcaf0;
+                border-radius: 8px;
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+
+                .tech-card:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 4px 15px rgba(13, 202, 240, 0.15);
+                    border-color: #0dcaf0;
+                }
+
+            .tech-title {
+                color: #f8f9fa;
+                font-weight: 600;
+                margin-bottom: 0;
+            }
+
+            .tech-id-badge {
+                background-color: rgba(13, 202, 240, 0.1);
+                color: #0dcaf0;
+                border: 1px solid #0dcaf0;
+                padding: 2px 8px;
+                border-radius: 4px;
+                font-size: 0.85rem;
+                font-family: monospace;
+            }
+
+            .tech-label {
+                color: #6b7280;
+                font-size: 0.9rem;
+            }
+
+            .tech-value {
+                color: #e5e7eb;
+                font-family: monospace;
+                font-size: 0.95rem;
+            }
+
+            /* 5. Custom Buttons */
+            .btn-tech-primary {
+                background-color: #0dcaf0;
+                color: #000;
+                font-weight: 600;
+                border: none;
+            }
+
+                .btn-tech-primary:hover {
+                    background-color: #0bb5d6;
+                    color: #000;
+                    box-shadow: 0 0 10px rgba(13, 202, 240, 0.4);
+                }
+
+            .btn-tech-outline {
+                color: #0dcaf0;
+                border: 1px solid #0dcaf0;
+                background: transparent;
+            }
+
+                .btn-tech-outline:hover {
+                    background-color: #0dcaf0;
+                    color: #000;
+                }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mb-0">
+        <nav class="navbar navbar-expand-sm navbar-dark mb-4">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    &lt;/&gt; library
+
+                <!-- NEW ATTRACTIVE LOGO -->
+                <a class="brand-container" asp-controller="Home" asp-action="Index">
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h1 class="brand-text">Library<span class="brand-text-highlight">Sys</span></h1>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 ms-4">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Books" asp-action="Index">Books</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Members" asp-action="Index">Members</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Notes" asp-action="Index">Notepad</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link text-light fw-semibold" asp-controller="Books" asp-action="Index">Books</a></li>
+                        <li class="nav-item"><a class="nav-link text-light fw-semibold" asp-controller="Members" asp-action="Index">Members</a></li>
+                        <li class="nav-item"><a class="nav-link text-light fw-semibold" asp-controller="Loans" asp-action="Index">Loans</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-    <!-- Main Content -->
-    <div class="lib-page">
-        <main role="main">
+    <div class="container">
+        <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <!-- No footer as requested -->
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,41 +1,85 @@
 ﻿@{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Home Page";
 }
 
-<div class="lib-hero">
-    <h1>Welcome to the <span>Library System</span></h1>
-    <p>A modern, high-performance management portal. Easily track books, manage members, and organize notes all in one place.</p>
-</div>
-
-<div class="lib-toolbar">
+<!-- Header Section -->
+<div class="d-flex justify-content-between align-items-center mb-4 mt-4">
     <div>
-        <h2>Quick Actions</h2>
-        <p class="lib-count">>_ Select a module to begin</p>
+        <h2 class="text-light fw-bold mb-1">Library System Dashboard</h2>
+        <p class="text-info font-monospace mb-0" style="font-size: 0.9rem;">&gt;_ A modern, high-performance management portal</p>
     </div>
 </div>
 
-<div class="lib-grid mb-5">
-    <div class="lib-box">
-        <h3 class="lib-box-title">📖 Book Catalogue</h3>
-        <p class="lib-box-meta">Browse, add, and update the library's book inventory. Keep track of titles, categories, and prices.</p>
-        <div class="lib-box-actions">
-            <a asp-controller="Books" asp-action="Index" class="lib-btn lib-btn-primary w-100">Manage Books</a>
+<!-- Grid Section -->
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    
+    <!-- Book Catalogue Card -->
+    <div class="col">
+        <div class="card tech-card h-100 p-3">
+            <div class="card-body d-flex flex-column p-2">
+                
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h5 class="tech-title text-info"><i class="fa-solid fa-book me-2"></i>Book Catalogue</h5>
+                    <span class="tech-id-badge">MODULE 01</span>
+                </div>
+
+                <div class="mb-4 flex-grow-1">
+                    <p class="text-light" style="font-size: 0.95rem;">Browse, add, and update the library's book inventory. Keep track of titles, categories, and prices.</p>
+                </div>
+
+                <hr class="border-secondary opacity-25 mb-3 mt-0">
+
+                <div class="d-flex gap-2">
+                    <a asp-controller="Books" asp-action="Index" class="btn btn-sm btn-tech-outline w-100 fw-bold">Manage Books</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="lib-box">
-        <h3 class="lib-box-title">👥 Members Directory</h3>
-        <p class="lib-box-meta">Manage student and faculty accounts. Register new members and update their contact information.</p>
-        <div class="lib-box-actions">
-            <a asp-controller="Members" asp-action="Index" class="lib-btn lib-btn-ghost w-100">Manage Members</a>
+    <!-- Members Directory Card -->
+    <div class="col">
+        <div class="card tech-card h-100 p-3">
+            <div class="card-body d-flex flex-column p-2">
+                
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h5 class="tech-title text-info"><i class="fa-solid fa-users me-2"></i>Members Directory</h5>
+                    <span class="tech-id-badge">MODULE 02</span>
+                </div>
+
+                <div class="mb-4 flex-grow-1">
+                    <p class="text-light" style="font-size: 0.95rem;">Manage student and faculty accounts. Register new members and update their contact information.</p>
+                </div>
+
+                <hr class="border-secondary opacity-25 mb-3 mt-0">
+
+                <div class="d-flex gap-2">
+                    <a asp-controller="Members" asp-action="Index" class="btn btn-sm btn-tech-outline w-100 fw-bold">Manage Members</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="lib-box">
-        <h3 class="lib-box-title">📝 System Notepad</h3>
-        <p class="lib-box-meta">Quickly jot down announcements, reminders, or internal notes for the library staff.</p>
-        <div class="lib-box-actions">
-            <a asp-controller="Notes" asp-action="Index" class="lib-btn lib-btn-ghost w-100">Open Notepad</a>
+    <!-- Loans & Transactions Card -->
+    <div class="col">
+        <div class="card tech-card h-100 p-3">
+            <div class="card-body d-flex flex-column p-2">
+                
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h5 class="tech-title text-info"><i class="fa-solid fa-handshake me-2"></i>Loans & Returns</h5>
+                    <span class="tech-id-badge">MODULE 03</span>
+                </div>
+
+                <div class="mb-4 flex-grow-1">
+                    <p class="text-light" style="font-size: 0.95rem;">Process book borrowing, monitor active loans, check due dates, and handle returns securely.</p>
+                </div>
+
+                <hr class="border-secondary opacity-25 mb-3 mt-0">
+
+                <div class="d-flex gap-2">
+                    <a asp-controller="Loans" asp-action="Index" class="btn btn-sm btn-tech-outline w-100 fw-bold">View Loans</a>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>

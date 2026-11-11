@@ -3,7 +3,10 @@
     ViewData["Title"] = "Delete Member";
 }
 <div class="lib-danger-box">
-    <h1>>_ Delete Member</h1>
+    <h1>>@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}</h1>
     @if (ViewBag.Error != null)
     {
         <div class="alert alert-danger">@ViewBag.Error</div>
